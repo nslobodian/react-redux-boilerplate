@@ -1,3 +1,3 @@
-import CoreLayout from './CoreLayoutContainer'
+import CoreLayout from './CoreLayout'
 
 export default CoreLayout

@@ -58,8 +58,8 @@ export const checkToken = () => dispatch => {
 const initialState = {
   signInLoading: false,
   loggedIn: false,
-  admin: {},
-  adminLoading: false
+  user: {},
+  userLoading: false
 }
 
 export default createReducer(initialState, {
@@ -71,11 +71,10 @@ export default createReducer(initialState, {
   [SIGN_IN_FAILURE]: () => ({signInLoading: false}),
   [LOGOUT_ATTEMPT]: () => ({loggedIn: false}),
   [GET_ME_ATTEMPT]: () => ({adminLoading: true}),
-  [GET_ME_SUCCESS]: (state, {admin}) => ({
-    adminLoading: false,
+  [GET_ME_SUCCESS]: (state, {user}) => ({
     loggedIn: true,
-    admin
+    user
   }),
-  [GET_ME_FAILURE]: () => ({adminLoading: false}),
+  [GET_ME_FAILURE]: () => ({userLoading: false}),
   [CHECK_TOKEN]: () => ({loggedIn: true})
 })

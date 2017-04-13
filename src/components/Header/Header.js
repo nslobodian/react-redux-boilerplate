@@ -16,14 +16,14 @@ export const Header = pure(({loggedIn, logout, username}) =>
           <li><Link to={home}>Test</Link></li>
           <li><Link to={home}>Test 2</Link></li>
         </ul>
-        <ul className='nav navbar-nav navbar-right'>
+        {loggedIn && <ul className='nav navbar-nav navbar-right'>
           <li>
             <a href='#'>{username}</a>
           </li>
           <li>
             <button onClick={logout} className='btn btn-default navbar-btn'>Logout</button>
           </li>
-        </ul>
+        </ul>}
       </div>
     </div>
   </nav>

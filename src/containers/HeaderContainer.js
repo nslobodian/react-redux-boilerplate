@@ -7,13 +7,11 @@ const mapActionCreators = {logout}
 const mapStateToProps = ({
   Auth: {
     loggedIn,
-    admin: {
-      username
-    }
+    user
   }
 }) => ({
   loggedIn,
-  username
+  user
 })
 
 export default connect(mapStateToProps, mapActionCreators)(Header)
