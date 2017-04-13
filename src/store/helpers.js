@@ -8,13 +8,6 @@ export const actionPaginationCreator = (type, cb, prop = 'pagination') => value 
   })
   dispatch(cb())
 }
-export const actionChangeFilterCreator = (type, cb) => (key, value, attempt = true) => dispatch => {
-  dispatch({
-    type,
-    searchValues: {[key]: value || undefined}
-  })
-  attempt && dispatch(cb())
-}
 
 export const reducerHelper = actions =>
   mergeAll(actions.map(action => {
@@ -40,17 +33,6 @@ export const reducerHelper = actions =>
           }
         case 'SUCCESS':
           return {
-            [action]: ({[dataName]: {searchValues}}, {pagination, data}) => ({
-              [`${name}Loading`]: false,
-              [dataName]: {
-                searchValues,
-                pagination,
-                data
-              }
-            })
-          }
-        case 'SUCCESSFULLY':
-          return {
             [action]: (state, {type, ...data}) => ({
               [`${name}Loading`]: false,
               ...data
@@ -59,37 +41,6 @@ export const reducerHelper = actions =>
         case 'FAILURE':
           return {
             [action]: () => ({[`${name}Loading`]: false}),
-          }
-        case 'PAGINATION':
-          return {
-            [action]: ({[dataName]: {data, pagination, searchValues}}, action) => ({
-              [dataName]: {
-                data,
-                searchValues,
-                pagination: {
-                  ...pagination,
-                  ...action.pagination
-                }
-              }
-            })
-          }
-        case 'PROPS':
-          return {
-            [action]: ({pagination}, action) => ({
-              pagination: {
-                ...pagination,
-                ...action.pagination
-              }
-            })
-          }
-        case 'FILTERS':
-          return {
-            [action]: ({searchValues}, action) => ({
-              searchValues: {
-                ...searchValues,
-                ...action.searchValues
-              }
-            })
           }
         default:
           return {

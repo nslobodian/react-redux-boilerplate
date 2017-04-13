@@ -1,7 +1,7 @@
 import createReducer from 'utils/createReducer'
 import {push} from 'react-router-redux'
 import urls from 'utils/urls'
-import {actionCreator} from 'store/helpers'
+import {actionCreator, reducerHelper} from 'store/helpers'
 
 // ------------------------------------
 // Constants
@@ -31,9 +31,6 @@ export const signInAttempt = values => dispatch => new Promise((resolve, reject)
   })
 })
 
-export const signInSuccess = actionCreator(SIGN_IN_SUCCESS)
-export const signInFailure = actionCreator(SIGN_IN_FAILURE)
-
 export const logout = () => dispatch => {
   localStorage.removeItem('token')
   dispatch(push(urls.login))
@@ -41,17 +38,12 @@ export const logout = () => dispatch => {
 }
 
 export const getMeAttempt = actionCreator(GET_ME_ATTEMPT)
-export const getMeSuccess = actionCreator(GET_ME_SUCCESS, 'admin')
-
-export const getMeFailure = () => dispatch => {
-  dispatch({type: GET_ME_FAILURE})
-  dispatch(logout())
-}
 
 export const checkToken = () => dispatch => {
   dispatch({type: CHECK_TOKEN})
   dispatch(localStorage.getItem('token') ? getMeAttempt() : logout())
 }
+
 // ------------------------------------
 // Reducer
 // ------------------------------------
@@ -59,22 +51,22 @@ const initialState = {
   signInLoading: false,
   loggedIn: false,
   user: {},
-  userLoading: false
+  getMeLoading: false
 }
 
+const reducers = reducerHelper([
+  SIGN_IN_ATTEMPT,
+  SIGN_IN_FAILURE,
+  GET_ME_ATTEMPT,
+  GET_ME_SUCCESS,
+  GET_ME_FAILURE
+])
 export default createReducer(initialState, {
-  [SIGN_IN_ATTEMPT]: () => ({signInLoading: true}),
+  ...reducers,
   [SIGN_IN_SUCCESS]: () => ({
     signInLoading: false,
     loggedIn: true
   }),
-  [SIGN_IN_FAILURE]: () => ({signInLoading: false}),
   [LOGOUT_ATTEMPT]: () => ({loggedIn: false}),
-  [GET_ME_ATTEMPT]: () => ({adminLoading: true}),
-  [GET_ME_SUCCESS]: (state, {user}) => ({
-    loggedIn: true,
-    user
-  }),
-  [GET_ME_FAILURE]: () => ({userLoading: false}),
   [CHECK_TOKEN]: () => ({loggedIn: true})
 })
