@@ -1,10 +1,11 @@
 import createReducer from 'utils/createReducer'
+import {actionCreator, reducerHelper} from 'store/helpers'
 
 // ------------------------------------
 // Constants
 // ------------------------------------
 
-export const <%= pascalEntityName.toUpperCase() %>ATTEMPT = '<%= pascalEntityName.toUpperCase() %>ATTEMPT'
+export const <%= pascalEntityName.toUpperCase() %>_ATTEMPT = '<%= pascalEntityName.toUpperCase() %>_ATTEMPT'
 
 // ------------------------------------
 // Actions
@@ -12,7 +13,7 @@ export const <%= pascalEntityName.toUpperCase() %>ATTEMPT = '<%= pascalEntityNam
 
 export const <%= pascalEntityName.toLowerCase() %>ATEMPT = (params) => (dispatch, getStore) => {
   dispatch({
-    type: <%= pascalEntityName.toUpperCase() %>ATTEMPT,
+    type: <%= pascalEntityName.toUpperCase() %>_ATTEMPT,
     params
   })
 }
@@ -25,7 +26,7 @@ const initialState = {
 }
 
 export default createReducer(initialState, {
-  [<%= pascalEntityName.toUpperCase() %>ATTEMPT]: (state, action) => ({
+  [<%= pascalEntityName.toUpperCase() %>_ATTEMPT]: (state, action) => ({
     fetching: false
   })
 })
