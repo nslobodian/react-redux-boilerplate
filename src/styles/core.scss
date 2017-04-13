@@ -1,0 +1,149 @@
+:global {
+  @import '~normalize.css/normalize';
+  @import 'bootstrap';
+
+  .pagination {
+    margin: 0;
+  }
+
+  .table {
+    margin-bottom: 0;
+    @include top-bottom-border;
+
+    thead {
+      tr:first-of-type {
+        background-color: #f5f5f5;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .react-spinner {
+    position: absolute !important;
+    z-index: 3;
+  }
+  .react-spinner_bar {
+    background-color: black !important;
+  }
+
+  .form-control[readonly] {
+    background-color: #fff !important;
+  }
+
+  .table-responsive {
+    min-height: 250px;
+  }
+
+  .rc-tabs-content-animated {
+    transition: none !important;
+  }
+
+  .onlyCloseButton {
+    .modal-header {
+      position: relative;
+      padding: 0;
+      margin-bottom: -5px;
+      border: none;
+
+      .close {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        z-index: 2;
+      }
+    }
+  }
+}
+
+@import 'shared';
+
+html {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+table {
+  td {
+    vertical-align: middle !important;
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.flex {
+  display: flex;
+
+  > * {
+    min-width: 0;
+  }
+
+  &-center {
+    justify-content: center;
+    align-items: center;
+
+    &-x {
+      justify-content: center;
+    }
+
+    &-y {
+      align-items: center;
+    }
+  }
+
+  &-column {
+    flex-direction: column;
+  }
+
+  &-space-between {
+    justify-content: space-between;
+  }
+
+  &-end {
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    &-x {
+      justify-content: flex-end;
+    }
+
+    &-y {
+      align-items: flex-end;
+    }
+  }
+
+  &-wrap {
+    flex-wrap: wrap;
+  }
+
+  @for $i from 1 through 12 {
+    &-#{$i} {
+      flex: $i;
+    }
+  }
+}
+
+.EditButton {
+  @include link-variant($link-color);
+  text-align: right;
+}
+
+.CloseButton {
+  fill: $brandRed;
+  width: 20px;
+  height: 20px;
+}
+
+.CreateNewAudienceModalContainerHeight {
+  overflow-y: auto;
+  height: 910px;
+}

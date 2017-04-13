@@ -1,0 +1,193 @@
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/mixins';
+@import '../variables';
+@import 'common';
+@import 'forms';
+@import 'close-button';
+@import 'breakpoints';
+
+$form-lg-height: 60px;
+$form-sm-height: 40px;
+$form-lg-font-size: 18px;
+$form-sm-font-size: 16px;
+$form-color: #797979;
+
+@mixin top-bottom-border {
+  border-top: 1px solid $panel-inner-border;
+  border-bottom: 1px solid $panel-inner-border;
+}
+
+@mixin btn {
+  display: inline-block;
+  font-weight: $btn-font-weight;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  transition: all .3s ease;
+
+  &,
+  &:active,
+  &.active {
+    &:focus,
+    &.focus {
+      outline: 5px auto -webkit-focus-ring-color;
+      outline-offset: -2px;
+    }
+  }
+
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+
+  &.focus {
+    text-decoration: none;
+  }
+
+  &:active,
+  &.active {
+    background-image: none;
+    outline: 0;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  }
+
+  &.disabled,
+  &:disabled {
+    cursor: $cursor-disabled;
+    opacity: .65;
+    box-shadow: none;
+  }
+}
+
+// Boostrap v4 Outline button styles
+@mixin button-outline-variant($color) {
+  @include btn;
+
+  color: $color;
+  background-image: none;
+  background-color: transparent;
+  border-color: $color;
+
+  &:hover,
+  &:focus,
+  &.focus,
+  &:active,
+  &.active,
+  .open > .btn.dropdown-toggle {
+    color: #fff;
+    background-color: $color;
+    border-color: $color;
+  }
+
+  &.disabled,
+  &:disabled {
+    &:hover,
+    &:focus,
+    &.focus {
+      border-color: lighten($color, 20%);
+    }
+  }
+}
+
+/* To create links */
+@mixin link-variant($color, $hover-color: false, $hover-decoration: false) {
+  color: $color;
+  text-decoration: none;
+
+  &:hover, &:focus {
+    cursor: pointer;
+    text-decoration: none;
+
+    @if $hover-decoration {
+      text-decoration: underline;
+    }
+
+    @if $hover-color {
+      color: $hover-color;
+    } @else {
+      color: darken($color, 10%);
+    }
+  }
+}
+
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+
+@mixin button-variant($color, $background, $border) {
+  @include btn;
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+
+  &:focus,
+  &.focus {
+    color: $color;
+    background-color: darken($background, 10%);
+    border-color: darken($border, 25%);
+  }
+  &:hover {
+    color: $color;
+    background-color: darken($background, 10%);
+    border-color: darken($border, 12%);
+  }
+  &:active,
+  &.active,
+  .open > .btn.dropdown-toggle {
+    color: $color;
+    background-color: darken($background, 10%);
+    border-color: darken($border, 12%);
+
+    &:hover,
+    &:focus,
+    &.focus {
+      color: $color;
+      background-color: darken($background, 17%);
+      border-color: darken($border, 25%);
+    }
+  }
+  &:active,
+  &.active,
+  .open > .btn.dropdown-toggle {
+    background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &:hover,
+    &:focus,
+    &.focus {
+      background-color: $background;
+      border-color: $border;
+    }
+  }
+
+  .badge {
+    color: $background;
+    background-color: $color;
+  }
+}
+
+// Button sizes
+@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) {
+  padding: $padding-vertical $padding-horizontal;
+  font-size: $font-size;
+  line-height: $line-height;
+  border-radius: $border-radius;
+}
+
+// Input
+@mixin input($hover-color: null, $height: $input-height, $border-width: $input-border-width, $border-color: $input-border-color) {
+  border: $border-width solid $border-color;
+  height: $height;
+
+  &:not([disabled]) {
+    &:hover, &:focus, &:active {
+      background-color: $hover-color;
+      box-shadow: none;
+    }
+  }
+}
